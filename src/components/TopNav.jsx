@@ -1,19 +1,41 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { BrainCog } from 'lucide-react';
 import './TopNav.css';
 
-function TopNav() {
+function TopNav({ isAuthPage = false }) {
+  // Optionally, get current path if you want to highlight active buttons
   const location = useLocation();
 
   return (
-    <div className="top-nav">
-      <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
-        Login
-      </Link>
-      <Link to="/signup" className={location.pathname === '/signup' ? 'active' : ''}>
-        Sign Up
-      </Link>
-    </div>
+    <header className="dashboard-navbar">
+      <div className="logo-section">
+        <BrainCog size={24} className="logo-icon" />
+        <span className="app-name">AI Mentor</span>
+      </div>
+      <div className="user-section">
+        {isAuthPage ? (
+          <>
+            <Link 
+              to="/login" 
+              className={`nav-btn ${location.pathname === '/login' ? 'active' : ''}`}
+            >
+              Login
+            </Link>
+            <Link 
+              to="/signup" 
+              className={`nav-btn ${location.pathname === '/signup' ? 'active' : ''}`}
+            >
+              Signup
+            </Link>
+          </>
+        ) : (
+          <button className="settings-btn">
+            Settings
+          </button>
+        )}
+      </div>
+    </header>
   );
 }
 

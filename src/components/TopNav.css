@@ -1,29 +1,27 @@
-.top-nav {
-  position: absolute;
-  top: 24px;
-  right: 24px;
+.auth-buttons {
   display: flex;
-  gap: 10px;
-  z-index: 10;
+  gap: 1rem;
 }
 
-.top-nav a {
-  padding: 10px 18px;
-  border: 1px solid #ccc;
+.auth-btn {
+  padding: 0.4rem 1.2rem;
   border-radius: 8px;
-  background: white;
-  text-decoration: none;
-  color: #222;
   font-weight: 500;
-  transition: 0.3s ease;
+  text-decoration: none;
+  border: 1px solid #000;
+  transition: all 0.2s ease;
 }
 
-.top-nav a.active {
-  background-color: #0b1120;
-  color: #fff;
-  border-color: #0b1120;
+.active-btn {
+  background-color: white;
+  color: black;
 }
 
-.top-nav a:hover {
-  opacity: 0.9;
+.inactive-btn {
+  background-color: black;
+  color: white;
+}
+
+.auth-btn:hover {
+  opacity: 0.85;
 }

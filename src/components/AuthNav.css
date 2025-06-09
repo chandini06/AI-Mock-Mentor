@@ -1,0 +1,51 @@
+.dashboard-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #f8f9fb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-icon {
+  color: #4a90e2;
+}
+
+.app-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-btn {
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  background-color: transparent;
+  border: 1px solid #4a90e2;
+  color: #4a90e2;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.nav-btn:hover {
+  background-color: #4a90e2;
+  color: #fff;
+}
+
+.nav-btn.active {
+  background-color: #4a90e2;
+  color: white;
+}

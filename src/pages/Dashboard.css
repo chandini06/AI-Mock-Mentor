@@ -1,0 +1,219 @@
+/* src/pages/Dashboard.css */
+.dashboard-wrapper {
+  min-height: 100vh;
+  background: #f4f7fc;
+  padding: 40px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #0b1120;
+}
+
+.avatar img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.dashboard-main {
+  text-align: center;
+}
+
+.dashboard-main h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.dashboard-main p {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.mode-options {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.mode-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 30px 40px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  width: 100%;
+  max-width: 670px;
+  transition: transform 0.2s;
+}
+
+.mode-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.card-header .icon {
+  color: #2a57e8;
+}
+
+.label-title {
+  margin-top: 15px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}
+
+.labels {
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+
+.label {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin: 4px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.label.blue {
+  background-color: #cfe3ff;
+  color: #0047b3;
+}
+
+.label.green {
+  background-color: #d3f4d1;
+  color: #176b2c;
+}
+
+.label.purple {
+  background-color: #eedaff;
+  color: #6200ea;
+}
+
+.label.orange {
+  background-color: #ffe2ba;
+  color: #c97b00;
+}
+
+.label.red {
+  background-color: #ffcdd2;
+  color: #c62828;
+}
+
+.primary-btn,
+.secondary-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.primary-btn {
+  background-color: #010113ff;
+  color: #fff;
+  border: none;
+}
+
+.primary-btn:hover {
+  background-color: #00000d;
+}
+
+.secondary-btn {
+  background-color: #010113ff;
+  color: #fff;
+  border: none;
+}
+
+.secondary-btn:hover {
+  background-color: #1a1f30;
+}
+.dashboard-wrapper {
+  min-height: 100vh;
+  background-color: #f9f9f9;
+}
+
+/* Make navbar full width and fixed to top */
+.dashboard-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+/* Push main content down below fixed navbar */
+.dashboard-main {
+  padding: 100px 24px 40px; /* Top padding to avoid overlap */
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon {
+  color: #007bff;
+}
+
+.app-name {
+  font-weight: bold;
+  font-size: 20px;
+  color: #1a1a1a;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.welcome-text {
+  font-size: 14px;
+  color: #333;
+}
+
+.settings-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #f4f4f4;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}

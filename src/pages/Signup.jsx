@@ -1,7 +1,8 @@
+// src/pages/Signup.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Auth.css';
-import TopNav from '../components/TopNav';
+import AuthNav from '../components/AuthNav';
 import { User, Mail, Lock, Eye, EyeOff } from 'lucide-react';
 
 function Signup() {
@@ -9,7 +10,7 @@ function Signup() {
 
   return (
     <>
-      <TopNav />
+      <AuthNav />
 
       <div className="auth-wrapper">
         <div className="auth-card">
@@ -55,6 +56,9 @@ function Signup() {
             </div>
 
             <button className="primary-btn">Create Account</button>
+            <Link to="/login" className="switch-link">
+              Already have an account? <span>Sign in</span>
+            </Link>
           </form>
         </div>
       </div>

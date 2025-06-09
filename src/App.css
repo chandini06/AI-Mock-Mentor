@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+.switch-link {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #444;
+  text-decoration: none;
+}
+
+.switch-link span {
+  font-weight: 600;
+  color: #4a90e2;
+}
