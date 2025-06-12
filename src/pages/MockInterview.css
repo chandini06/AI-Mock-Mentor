@@ -1,5 +1,3 @@
-/* InterviewChat.css */
-
 .interview-chat-container {
   display: flex;
   height: 100vh;
@@ -97,7 +95,7 @@
   background-color: #010113ff;
 }
 
-/* Interview Body (main area) */
+/* Interview Body  */
 .interview-body {
   flex-grow: 1;
   display: flex;
@@ -108,7 +106,7 @@
   background-color: #f9fafb;
 }
 
-/* Make the chat area and input always stick to the bottom of the main area */
+
 .interview-chat-area {
   width: 100%;
   max-width: 600px;
@@ -119,7 +117,7 @@
   justify-content: flex-end;
 }
 
-/* Overlay the mic button in the center of the image in voice mode */
+
 .voice-mode-overlay {
   position: absolute;
   left: 50%;
@@ -131,7 +129,7 @@
   align-items: center;
 }
 
-/* Hide the default .voice-mode-input below the image */
+
 .voice-mode-input {
   display: none !important;
 }
@@ -177,13 +175,13 @@
   box-sizing: border-box;
 }
 
-/* Apply green and red backgrounds only to the Start Session and End Session buttons, not to the Text Mode and Voice Mode buttons */
+
 .controls > div:first-child > button:nth-child(1) {
-  background: #b6f2c5 !important; /* light green */
+  background: #b6f2c5 !important; 
   color: #166534 !important;
 }
 .controls > div:first-child > button:nth-child(2) {
-  background: #ffd6d6 !important; /* light red */
+  background: #ffd6d6 !important; 
   color: #b91c1c !important;
 }
 

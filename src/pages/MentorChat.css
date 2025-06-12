@@ -129,10 +129,10 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  background-color: #ffffff; /* white background */
+  background-color: #ffffff; 
   background-image: url('/src/pages/avatars-bg.png');
   background-repeat: repeat;
-  background-size: 700px; /* make avatar tiles small */
+  background-size: 700px; 
   background-position: center;
   opacity: 1;
   position: relative;
@@ -142,12 +142,12 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.7); /* Adjust 0.6 for more/less lightness */
+  background: rgba(255,255,255,0.7); 
   z-index: 1;
   pointer-events: none;
 }
 
-/* Make sure chat content is above the overlay */
+
 .chat-body > * {
   position: relative;
   z-index: 2;
