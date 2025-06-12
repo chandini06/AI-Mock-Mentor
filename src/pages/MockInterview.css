@@ -1,0 +1,314 @@
+/* InterviewChat.css */
+
+.interview-chat-container {
+  display: flex;
+  height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9fafc;
+}
+
+/* Sidebar */
+.chat-sidebar {
+  width: 20%;
+  min-width: 220px;
+  max-width: 320px;
+  background-color: #f3f4f6;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.sidebar-header h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.sidebar-toggle-btn {
+  background-color: #010113ff;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-toggle-btn:hover {
+  background-color: #010113ff;
+}
+
+.no-history {
+  color: #888;
+  font-size: 14px;
+}
+
+/* Main Chat Area */
+.chat-main {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  transition: width 0.3s ease;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+/* Header */
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  border-bottom: 1px solid #ddd;
+  background-color: #f9fafb;
+}
+
+.right-header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.back-btn {
+  background: #010113ff;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.back-btn:hover {
+  background-color: #010113ff;
+}
+
+/* Interview Body (main area) */
+.interview-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 40px 0 0 0;
+  background-color: #f9fafb;
+}
+
+/* Make the chat area and input always stick to the bottom of the main area */
+.interview-chat-area {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 0 auto;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* Overlay the mic button in the center of the image in voice mode */
+.voice-mode-overlay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Hide the default .voice-mode-input below the image */
+.voice-mode-input {
+  display: none !important;
+}
+
+.avatar-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 24px;
+}
+
+.controls > div {
+  display: flex;
+  gap: 0;
+  margin-bottom: 0;
+}
+
+.controls > div:last-child {
+  margin-bottom: 0;
+}
+
+.controls button {
+  flex: 1 1 0;
+  min-width: 150px;
+  padding: 10px 0;
+  border-radius: 8px;
+  border: none;
+  background: #e0e0e0 !important;
+  color: #222 !important;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.2s, color 0.2s;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Apply green and red backgrounds only to the Start Session and End Session buttons, not to the Text Mode and Voice Mode buttons */
+.controls > div:first-child > button:nth-child(1) {
+  background: #b6f2c5 !important; /* light green */
+  color: #166534 !important;
+}
+.controls > div:first-child > button:nth-child(2) {
+  background: #ffd6d6 !important; /* light red */
+  color: #b91c1c !important;
+}
+
+.controls button.active,
+.controls button:focus {
+  filter: brightness(0.95);
+}
+
+.status-text {
+  font-size: 18px;
+  color: #333;
+  font-weight: 500;
+  margin-top: 12px;
+  text-align: center;
+}
+
+.chat-item {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.chat-item:hover {
+  background: #e5efff;
+}
+
+.chat-item h4 {
+  font-size: 14px;
+  margin: 0 0 4px;
+  color: #1f2937;
+}
+
+.chat-item p {
+  font-size: 12px;
+  margin: 0;
+  color: #4b5563;
+}
+
+.chat-body {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-bubble {
+  max-width: 70%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  margin-bottom: 14px;
+  position: relative;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.user-message {
+  background-color: #111827;
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 0;
+}
+
+.ai-message {
+  background-color: #f1f5f9;
+  align-self: flex-start;
+  border-bottom-left-radius: 0;
+  color: #111827;
+}
+
+.chat-time {
+  font-size: 10px;
+  color: #9ca3af;
+  margin-top: 4px;
+  text-align: right;
+}
+
+.chat-input {
+  display: flex;
+  padding: 16px;
+  border-top: 1px solid #e5e7eb;
+  background-color: #ffffff;
+}
+
+.chat-input input {
+  flex-grow: 1;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.send-btn {
+  background-color: #111827;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-left: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-session-btn {
+  background: #010113ff;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.new-session-btn:hover {
+  background-color: #23234d;
+}

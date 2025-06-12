@@ -1,29 +1,82 @@
-// src/pages/Dashboard.jsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Dashboard.css';
 import { Link } from 'react-router-dom';
-import { MessageSquare, UserCheck, BrainCog, Settings } from 'lucide-react';
+import { MessageSquare, UserCheck, BrainCog, Settings, Users2, Clock } from 'lucide-react';
 
 function Dashboard() {
+  const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchStats() {
+      try {
+        setLoading(true);
+        setError(null);
+        // Replace '/api/stats' with your actual backend API URL
+        const response = await fetch('/api/stats');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setStats(data);
+      } catch (err) {
+        setError('Failed to load stats');
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchStats();
+  }, []);
+
+  // Helper to show loading, error, or the stat value
+  const renderStat = (value) => {
+    if (loading) return '...';
+    if (error) return '–';
+    if (value === undefined || value === null) return '–';
+    return value;
+  };
+
   return (
     <div className="dashboard-wrapper">
-      {/* TOP NAVBAR STYLE HEADER */}
       <header className="dashboard-navbar">
         <div className="logo-section">
           <BrainCog size={24} className="logo-icon" />
           <span className="app-name">AI Mentor</span>
         </div>
         <div className="user-section">
-          
           <button className="settings-btn">
             <Settings size={18} /> <span>Settings</span>
           </button>
         </div>
       </header>
 
+      <div className="dashboard-stats">
+        <div className="stat-card">
+          <p>Total Chats</p>
+          <div className="stat-content">
+            <h3>{renderStat(stats?.totalChats)}</h3>
+            <MessageSquare className="stat-icon" color="#3366ff" />
+          </div>
+        </div>
+        <div className="stat-card">
+          <p>Mock Interviews</p>
+          <div className="stat-content">
+            <h3>{renderStat(stats?.mockInterviews)}</h3>
+            <Users2 className="stat-icon" color="#28a745" />
+          </div>
+        </div>
+        <div className="stat-card">
+          <p>Hours Mentored</p>
+          <div className="stat-content">
+            <h3>{renderStat(stats?.hoursMentored)}</h3>
+            <Clock className="stat-icon" color="#9b2cf3" />
+          </div>
+        </div>
+      </div>
+
       <main className="dashboard-main">
-        <h2>Welcome Back 👋</h2>
-        <p>Select a mode to continue</p>
+        
 
         <div className="mode-options">
           <div className="mode-card mentor">

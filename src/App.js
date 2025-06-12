@@ -3,6 +3,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard'; // ✅ Import Dashboard
 import MentorChat from './pages/MentorChat';
+import MockInterview from './pages/MockInterview';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} /> {/* ✅ Add route */}
         <Route path="/mentor" element={<MentorChat />} />
+         <Route path="/interview" element={<MockInterview />} />
       </Routes>
     </Router>
   );
