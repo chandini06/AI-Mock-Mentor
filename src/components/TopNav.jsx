@@ -4,7 +4,7 @@ import { BrainCog } from 'lucide-react';
 import './TopNav.css';
 
 function TopNav({ isAuthPage = false }) {
-  // Optionally, get current path if you want to highlight active buttons
+ 
   const location = useLocation();
 
   return (

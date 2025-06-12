@@ -15,13 +15,13 @@ function MockInterview() {
   const [speechSynthesis, setSpeechSynthesis] = useState(null);
   const [recognition, setRecognition] = useState(null);
 
-  // Refs to hold the *latest* state values for use inside stable effect callbacks
+  
   const isListeningRef = useRef(isListening);
   const modeRef = useRef(mode);
   const sessionActiveRef = useRef(sessionActive);
-  const setMessagesRef = useRef(null); // To hold the latest setMessages function
-  const askNextQuestionTimeoutRef = useRef(null); // To manage the timeout for asking next question
-  const lastMessageRoleRef = useRef(null); // NEW: To track the role of the last added message
+  const setMessagesRef = useRef(null); 
+  const askNextQuestionTimeoutRef = useRef(null); 
+  const lastMessageRoleRef = useRef(null); 
 
   const [history, setHistory] = useState(() => {
     const saved = localStorage.getItem('mockInterviewHistory');
@@ -39,7 +39,7 @@ function MockInterview() {
     'Where do you see yourself in 5 years?'
   ];
 
-  // --- START: Refs for latest state values ---
+  
   useEffect(() => {
     isListeningRef.current = isListening;
   }, [isListening]);
@@ -56,7 +56,7 @@ function MockInterview() {
     setMessagesRef.current = setMessages;
   }, [setMessages]);
 
-  // NEW: Update lastMessageRoleRef when messages change
+  
   useEffect(() => {
     if (messages.length > 0) {
       lastMessageRoleRef.current = messages[messages.length - 1].role;
@@ -64,9 +64,7 @@ function MockInterview() {
       lastMessageRoleRef.current = null;
     }
   }, [messages]);
-  // --- END: Refs for latest state values ---
-
-  // --- START: Speech Synthesis (Text-to-Speech) and Speech Recognition (Speech-to-Text) Initialization ---
+  
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const synth = window.speechSynthesis;
@@ -79,30 +77,29 @@ function MockInterview() {
         rec.interimResults = false;
         rec.lang = 'en-US';
 
-        let lastTranscript = ''; // Local variable to prevent duplicate `onresult` calls
+        let lastTranscript = ''; 
 
         rec.onresult = (event) => {
           const currentTranscript = event.results[event.results.length - 1][0].transcript;
           console.log("Speech recognition raw result:", currentTranscript);
 
-          // Only process if the transcript is meaningful and different from the last processed one
+          
           if (currentTranscript.trim() && currentTranscript !== lastTranscript) {
               lastTranscript = currentTranscript;
 
-              // Use the ref to access the latest setMessages and update the messages array
+              
               setMessagesRef.current(prev => ([...prev, { role: 'user', text: currentTranscript }]));
               console.log("Added user message:", currentTranscript);
 
-              // *** IMPORTANT CHANGE: No direct call to askNextQuestion here ***
-              // The next question will be triggered by the useEffect that watches 'messages'
+             
           }
         };
 
         rec.onerror = (event) => {
           console.error('Speech recognition error:', event.error);
           setIsListening(false);
-          lastTranscript = ''; // Reset on error
-          // Consider notifying the user about the error, e.g., "Sorry, I couldn't hear you."
+          lastTranscript = ''; 
+          
         };
 
         rec.onend = () => {
@@ -118,7 +115,7 @@ function MockInterview() {
           } else {
             setIsListening(false);
           }
-          lastTranscript = ''; // Reset on end
+          lastTranscript = ''; 
         };
 
         rec.onstart = () => console.log('Recognition started');
@@ -137,29 +134,29 @@ function MockInterview() {
       if (recognition) {
         recognition.stop();
       }
-      // Clear any pending timeout when component unmounts
+      
       if (askNextQuestionTimeoutRef.current) {
         clearTimeout(askNextQuestionTimeoutRef.current);
       }
     };
   }, []);
-  // --- END: Speech Synthesis and Speech Recognition Initialization ---
+  
 
-  // NEW: useEffect to trigger askNextQuestion when a user message is added in voice mode
+  
   useEffect(() => {
-    // Check if the last message was from the user and we are in voice mode and session is active
+    
     if (lastMessageRoleRef.current === 'user' && mode === 'voice' && sessionActive) {
       console.log('User message detected in voice mode. Scheduling next question...');
-      // Clear any existing timeout to avoid asking multiple questions rapidly
+      
       if (askNextQuestionTimeoutRef.current) {
         clearTimeout(askNextQuestionTimeoutRef.current);
       }
-      // Set a new timeout to ask the next question after a short delay
+      
       askNextQuestionTimeoutRef.current = setTimeout(() => {
         askNextQuestion();
-      }, 1000); // 1-second delay before bot asks the next question
+      }, 1000); 
     }
-  }, [messages, mode, sessionActive]); // Dependencies: messages, mode, sessionActive
+  }, [messages, mode, sessionActive]); 
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -178,19 +175,17 @@ function MockInterview() {
   const askNextQuestion = () => {
     const interviewerQuestionCount = messages.filter(m => m.role === 'interviewer').length;
     
-    // Ensure we don't go out of bounds or ask same question if we ran out of questions
+    
     if (interviewerQuestionCount >= questions.length && questions.length > 0) {
       console.log("No more questions in the hardcoded list. Ending session or looping.");
-      // Option: End session here if you don't want to loop
-      // handleEndSession();
-      // For now, it will loop to the first question
+      
     }
 
     const next = questions[interviewerQuestionCount % questions.length];
     
     setCurrentQuestion(next);
     setMessages(prev => ([...prev, { role: 'interviewer', text: next }]));
-    console.log("Bot asked:", next); // Debugging
+    console.log("Bot asked:", next); 
 
     if (mode === 'voice') {
       speak(next);
@@ -214,7 +209,7 @@ function MockInterview() {
     if (speechSynthesis && speechSynthesis.speaking) {
       speechSynthesis.cancel();
     }
-    // Start the first question after a short delay
+    
     setTimeout(() => {
       askNextQuestion();
       if (mode === 'voice' && recognition && !isListening) {
@@ -253,7 +248,7 @@ function MockInterview() {
       ]);
     }
     setMessages([]);
-    // Clear any pending timeout when session ends
+  
     if (askNextQuestionTimeoutRef.current) {
       clearTimeout(askNextQuestionTimeoutRef.current);
     }
@@ -263,7 +258,7 @@ function MockInterview() {
     if (!inputValue.trim()) return;
     setMessages(prev => ([...prev, { role: 'user', text: inputValue }]));
     setInputValue('');
-    // For text mode, we can directly call askNextQuestion as there's no continuous speech input conflict
+    
     setTimeout(askNextQuestion, 1000);
   };
 

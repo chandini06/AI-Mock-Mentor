@@ -13,7 +13,7 @@ function Dashboard() {
       try {
         setLoading(true);
         setError(null);
-        // Replace '/api/stats' with your actual backend API URL
+        
         const response = await fetch('/api/stats');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
