@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Dashboard.css';
 import { Link } from 'react-router-dom';
-import { MessageSquare, UserCheck, BrainCog, Settings, Users2, Clock } from 'lucide-react';
+import { MessageSquare, UserCheck, Clock } from 'lucide-react'; // Removed BrainCog, Settings, Users2 as they'll be in TopNav or specific sections
+import TopNav from '../components/TopNav'; // Assuming TopNav is in a 'components' folder
 
 function Dashboard() {
   const [stats, setStats] = useState(null);
@@ -13,7 +14,7 @@ function Dashboard() {
       try {
         setLoading(true);
         setError(null);
-        
+        // Replace '/api/stats' with your actual backend API URL
         const response = await fetch('/api/stats');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -39,17 +40,8 @@ function Dashboard() {
 
   return (
     <div className="dashboard-wrapper">
-      <header className="dashboard-navbar">
-        <div className="logo-section">
-          <BrainCog size={24} className="logo-icon" />
-          <span className="app-name">AI Mentor</span>
-        </div>
-        <div className="user-section">
-          <button className="settings-btn">
-            <Settings size={18} /> <span>Settings</span>
-          </button>
-        </div>
-      </header>
+      {/* Use the reusable TopNav component */}
+      <TopNav /> 
 
       <div className="dashboard-stats">
         <div className="stat-card">
@@ -63,7 +55,8 @@ function Dashboard() {
           <p>Mock Interviews</p>
           <div className="stat-content">
             <h3>{renderStat(stats?.mockInterviews)}</h3>
-            <Users2 className="stat-icon" color="#28a745" />
+            {/* Using a different icon for mock interviews now that UserCheck is for Account */}
+            <UserCheck className="stat-icon" color="#28a745" /> 
           </div>
         </div>
         <div className="stat-card">
@@ -76,8 +69,6 @@ function Dashboard() {
       </div>
 
       <main className="dashboard-main">
-        
-
         <div className="mode-options">
           <div className="mode-card mentor">
             <div className="card-header">
@@ -96,7 +87,7 @@ function Dashboard() {
 
           <div className="mode-card interview">
             <div className="card-header">
-              <UserCheck className="icon" size={22} />
+              <UserCheck className="icon" size={22} /> {/* Reused UserCheck for interview card icon */}
               <h3>Mock Interview</h3>
             </div>
             <p>Practice interviews with realistic scenarios and get instant feedback</p>

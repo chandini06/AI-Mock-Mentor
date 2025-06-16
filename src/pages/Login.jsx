@@ -13,6 +13,19 @@ function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    const email = e.target.elements[0].value;
+    localStorage.setItem('userEmail', email);
+
+    // Log login activity (always add on login)
+    const activity = JSON.parse(localStorage.getItem('loginActivity') || '[]');
+    const now = new Date();
+    const date = now.toISOString().slice(0, 10);
+    const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const browser = navigator.userAgent.match(/(Chrome|Firefox|Edge|Safari)/)?.[0] || 'Unknown';
+    const os = navigator.userAgent.match(/Windows|Mac|Linux|Android|iOS/)?.[0] || 'Unknown';
+    activity.unshift({ date, time, browser, os });
+    localStorage.setItem('loginActivity', JSON.stringify(activity.slice(0, 3)));
+
     navigate('/dashboard');
   };
 

@@ -1,27 +1,87 @@
+.dashboard-navbar {
+    display: flex;
+    justify-content: space-between; /* Pushes logo to left, user section to right */
+    align-items: center;
+    padding: 15px 25px; /* Adjust padding as needed */
+    background-color: var(--navbar-bg, #fff); /* Using CSS variables for consistency */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    width: 100%;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+}
+
+.logo-icon {
+    color: var(--brand-color, #2a57e8); /* Example brand color */
+}
+
+.app-name {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--primary-text-color, #333);
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between buttons/icons in the user section */
+}
+
+/* Styles for the account icon button (when not on auth pages) */
+.account-icon-btn {
+    background: none;
+    border: none;
+    color: var(--secondary-text-color, #555); /* Adjust color as needed, often a muted black/dark grey */
+    cursor: pointer;
+    padding: 8px; /* Add some padding around the icon */
+    border-radius: 50%; /* Make it circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.account-icon-btn:hover {
+    background-color: var(--hover-bg-color, #f0f0f0); /* Light background on hover */
+    color: var(--primary-text-color, #333); /* Slightly darker icon on hover */
+}
+
+/* Styles for authentication buttons (Login/Signup) */
 .auth-buttons {
-  display: flex;
-  gap: 1rem;
+    display: flex;
+    gap: 1rem; /* Space between Login and Signup buttons */
 }
 
 .auth-btn {
-  padding: 0.4rem 1.2rem;
-  border-radius: 8px;
-  font-weight: 500;
-  text-decoration: none;
-  border: 1px solid #000;
-  transition: all 0.2s ease;
+    padding: 0.4rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none; /* Remove underline from links */
+    border: 1px solid var(--border-color, #000); /* Consistent border color */
+    transition: all 0.2s ease;
+    display: inline-flex; /* Ensures proper alignment if icons are added later */
+    align-items: center;
+    justify-content: center;
 }
 
+/* Styles for the active authentication button */
 .active-btn {
-  background-color: white;
-  color: black;
+    background-color: var(--active-btn-bg, white); /* White background for active */
+    color: var(--active-btn-text, black); /* Black text for active */
+    border-color: var(--active-btn-border, black); /* Ensure border matches active text/bg */
 }
 
+/* Styles for the inactive authentication button */
 .inactive-btn {
-  background-color: black;
-  color: white;
+    background-color: var(--inactive-btn-bg, black); /* Black background for inactive */
+    color: var(--inactive-btn-text, white); /* White text for inactive */
+    border-color: var(--inactive-btn-border, black); /* Ensure border matches inactive text/bg */
 }
 
 .auth-btn:hover {
-  opacity: 0.85;
+    opacity: 0.85; /* Slight opacity change on hover for both active/inactive */
 }

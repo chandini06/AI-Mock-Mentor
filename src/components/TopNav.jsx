@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BrainCog } from 'lucide-react';
+import { BrainCog, User, Settings } from 'lucide-react'; // Import User and Settings for clarity
 import './TopNav.css';
 
 function TopNav({ isAuthPage = false }) {
- 
   const location = useLocation();
 
   return (
@@ -30,9 +29,9 @@ function TopNav({ isAuthPage = false }) {
             </Link>
           </>
         ) : (
-          <button className="settings-btn">
-            Settings
-          </button>
+          <Link to="/account" className="account-icon-btn" title="Account Settings">
+            <User size={24} /> {/* Changed to User icon for account */}
+          </Link>
         )}
       </div>
     </header>
