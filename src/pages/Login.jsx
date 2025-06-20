@@ -113,7 +113,7 @@ function Login() {
               </button>
             )}
 
-            {/* Forgot Password Button (centered, borderless) */}
+            
             <div style={{ textAlign: 'center', marginTop: '12px' }}>
               <button
                 type="button"

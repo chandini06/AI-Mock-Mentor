@@ -158,6 +158,7 @@
 }
 
 
+
 .dashboard-navbar {
   position: fixed;
   top: 0;
@@ -272,4 +273,14 @@
   font-weight: 700;
   margin: 20px 0;
   color: #111;
+}
+
+.mode-card:nth-child(2) .secondary-btn {
+  background-color: #010113 !important;
+  color: white !important;
+  border: none !important;
+}
+
+.mode-card:nth-child(2) .secondary-btn:hover {
+  background-color: #000000 !important;
 }

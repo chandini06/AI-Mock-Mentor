@@ -226,33 +226,43 @@ function MockInterview() {
   };
 
   const handleEndSession = () => {
-    if (recognition && isListening) {
-      recognition.stop();
-      setIsListening(false);
-    }
-    if (speechSynthesis && speechSynthesis.speaking) {
-      speechSynthesis.cancel();
-    }
+  if (recognition && isListening) {
+    recognition.stop();
+    setIsListening(false);
+  }
+  if (speechSynthesis && speechSynthesis.speaking) {
+    speechSynthesis.cancel();
+  }
 
-    setSessionActive(false);
-    setCurrentQuestion('');
-    if (messages.length > 0) {
-      setHistory(prev => [
-        {
-          id: Date.now(),
-          date: new Date().toLocaleString(),
-          transcript: messages,
-          mode: mode
-        },
-        ...prev,
-      ]);
-    }
-    setMessages([]);
+  setSessionActive(false);
+  setCurrentQuestion('');
+  if (messages.length > 0) {
+    setHistory(prev => [
+      {
+        id: Date.now(),
+        date: new Date().toLocaleString(),
+        transcript: messages,
+        mode: mode
+      },
+      ...prev,
+    ]);
+  }
+  setMessages([]);
+
+  if (askNextQuestionTimeoutRef.current) {
+    clearTimeout(askNextQuestionTimeoutRef.current);
+  }
   
-    if (askNextQuestionTimeoutRef.current) {
-      clearTimeout(askNextQuestionTimeoutRef.current);
-    }
-  };
+const interviewData = {
+  totalQuestions: messages.filter(m => m.role === 'interviewer').length,
+  questions: messages.filter(m => m.role === 'interviewer').map(m => m.text),
+  userAnswers: messages.filter(m => m.role === 'user').map(m => m.text),
+};
+localStorage.setItem('latestInterview', JSON.stringify(interviewData));
+
+  
+  navigate('/results');
+};
 
   const handleSend = () => {
     if (!inputValue.trim()) return;

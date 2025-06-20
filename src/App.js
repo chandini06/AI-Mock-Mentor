@@ -5,6 +5,9 @@ import Dashboard from './pages/Dashboard';
 import MentorChat from './pages/MentorChat';
 import MockInterview from './pages/MockInterview';
 import Account from './pages/Account';
+import Results from "./pages/Results";
+import Performance from './pages/Performance';
+
 
 function App() {
   return (
@@ -17,6 +20,8 @@ function App() {
         <Route path="/mentor" element={<MentorChat />} />
          <Route path="/interview" element={<MockInterview />} />
           <Route path="/account" element={<Account />} /> 
+           <Route path="/results" element={<Results />} />
+           <Route path="/performance" element={<Performance />} />
       </Routes>
     </Router>
   );
