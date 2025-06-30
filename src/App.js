@@ -7,6 +7,11 @@ import MockInterview from './pages/MockInterview';
 import Account from './pages/Account';
 import Results from "./pages/Results";
 import Performance from './pages/Performance';
+import UserManagement from "./pages/UserManagement";
+import BotManagement from "./pages/BotManagement";
+import Reports from "./pages/Reports";
+
+
 
 
 function App() {
@@ -22,6 +27,10 @@ function App() {
           <Route path="/account" element={<Account />} /> 
            <Route path="/results" element={<Results />} />
            <Route path="/performance" element={<Performance />} />
+           <Route path="/admin/users" element={<UserManagement />} />
+<Route path="/admin/bots" element={<BotManagement />} />
+<Route path="/admin/reports" element={<Reports />} />
+
       </Routes>
     </Router>
   );

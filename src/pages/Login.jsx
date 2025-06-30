@@ -14,9 +14,16 @@ function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.elements[0].value;
-    localStorage.setItem('userEmail', email);
+    const password = e.target.elements[1].value;
 
-    // Log login activity (always add on login)
+    // ✅ Automatically treat emails starting with "admin" as admins
+    const isAdmin = email.toLowerCase().startsWith('admin');
+    const role = isAdmin ? 'admin' : 'user';
+
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('userRole', role);
+
+    // Log login activity
     const activity = JSON.parse(localStorage.getItem('loginActivity') || '[]');
     const now = new Date();
     const date = now.toISOString().slice(0, 10);
@@ -113,7 +120,6 @@ function Login() {
               </button>
             )}
 
-            
             <div style={{ textAlign: 'center', marginTop: '12px' }}>
               <button
                 type="button"

@@ -1,42 +1,53 @@
 .dashboard-wrapper {
   min-height: 100vh;
-  background: #f4f7fc;
+  background: #f9f9f9;
   padding: 40px;
   font-family: 'Segoe UI', sans-serif;
 }
 
-.dashboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 40px;
-}
-
-.logo {
-  font-size: 28px;
-  font-weight: bold;
-  color: #0b1120;
-}
-
-.avatar img {
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-}
-
 .dashboard-main {
+  padding: 90px 24px 40px;
   text-align: center;
 }
 
-.dashboard-main h2 {
-  font-size: 35px;
+.dashboard-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 30px 32px 0;
+  margin-top: 20px;
   margin-bottom: 10px;
 }
 
-.dashboard-main p {
+.stat-card {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.stat-card p {
+  font-size: 14px;
   color: #666;
-  font-size: 16px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+}
+
+.stat-card h3 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+}
+
+.stat-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-icon {
+  width: 24px;
+  height: 24px;
 }
 
 .mode-options {
@@ -129,6 +140,7 @@
   padding: 12px;
   border-radius: 8px;
   font-weight: 600;
+  font-size: 14px;
   text-decoration: none;
   transition: background-color 0.2s;
 }
@@ -152,129 +164,8 @@
 .secondary-btn:hover {
   background-color: #1a1f30;
 }
-.dashboard-wrapper {
-  min-height: 100vh;
-  background-color: #f9f9f9;
-}
 
-
-
-.dashboard-navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  background-color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 24px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  z-index: 1000;
-}
-
-
-.dashboard-main {
-  padding: 90px 24px 40px; 
-}
-
-.logo-section {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.logo-icon {
-  color: #007bff;
-}
-
-.app-name {
-  font-weight: bold;
-  font-size: 20px;
-  color: #1a1a1a;
-}
-
-.user-section {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.welcome-text {
-  font-size: 14px;
-  color: #333;
-}
-
-.settings-btn {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  background: #f4f4f4;
-  border: 1px solid #ccc;
-  padding: 6px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 500;
-}
-.dashboard-stats {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 30px 32px 0;
-  margin-top: 20px;
-  margin-bottom: 10px; 
-}
-
-
-.stat-card {
-  flex: 1;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.stat-card p {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 10px;
-}
-
-.stat-card h3 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #000;
-}
-
-.stat-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.stat-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.section-heading {
-  font-size: 32px;
-  font-weight: 600;
-  color: #1a1a1a;
-  text-align: center;
-  margin: 10px 0 30px;
-}
-
-
-
-.dashboard-title {
-  font-size: 28px;
-  font-weight: 700;
-  margin: 20px 0;
-  color: #111;
-}
-
+/* Interview card override */
 .mode-card:nth-child(2) .secondary-btn {
   background-color: #010113 !important;
   color: white !important;
@@ -283,4 +174,49 @@
 
 .mode-card:nth-child(2) .secondary-btn:hover {
   background-color: #000000 !important;
+}
+
+/* Admin Cards Styling */
+.admin-cards-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.mode-card.admin {
+  flex: 1 1 300px;
+  max-width: 360px;
+}
+
+.mode-card.admin h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #0b1120;
+}
+
+.mode-card.admin p {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.mode-card.admin .primary-btn,
+.mode-card.admin .secondary-btn {
+  background-color: #010113ff;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  width: 100%;
+  text-align: center;
+}
+
+.mode-card.admin .primary-btn:hover,
+.mode-card.admin .secondary-btn:hover {
+  background-color: #00000d;
 }

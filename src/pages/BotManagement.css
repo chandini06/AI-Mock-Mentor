@@ -1,0 +1,148 @@
+
+.bot-management-container {
+  padding-top: 20px;
+  padding-right: 5vw;
+  padding-bottom: 40px;
+  padding-left: 5vw;
+}
+
+
+.top-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.top-bar h2 {
+  font-size: 2rem;
+  color: #111;
+}
+
+.back-btn {
+  background-color: #010113;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.back-btn:hover {
+  background-color: #00000d;
+}
+
+.bot-form {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bot-form input,
+.bot-form select,
+.bot-form textarea {
+  padding: 10px 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.bot-form textarea {
+  resize: vertical;
+  height: 80px;
+}
+
+.add-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  width: fit-content;
+}
+
+.add-btn:hover {
+  background-color: #005dc1;
+}
+
+.bot-list {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.bot-card {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 16px 20px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.bot-card h4 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  color: #222;
+}
+
+.bot-card h4 span {
+  font-weight: normal;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.bot-card p {
+  font-size: 0.95rem;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.delete-btn {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #c62828;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 600px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .top-bar h2 {
+    font-size: 1.5rem;
+  }
+
+  .back-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .add-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

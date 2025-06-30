@@ -14,6 +14,14 @@ function MockInterview() {
   const [isListening, setIsListening] = useState(false);
   const [speechSynthesis, setSpeechSynthesis] = useState(null);
   const [recognition, setRecognition] = useState(null);
+  const [interviewPresets, setInterviewPresets] = useState([]);
+const [selectedInterviewPresetId, setSelectedInterviewPresetId] = useState('');
+useEffect(() => {
+  const allPresets = JSON.parse(localStorage.getItem('mentor_presets') || '[]');
+  const filtered = allPresets.filter(p => p.type === 'Interview');
+  setInterviewPresets(filtered);
+}, []);
+
 
   
   const isListeningRef = useRef(isListening);
@@ -373,7 +381,20 @@ localStorage.setItem('latestInterview', JSON.stringify(interviewData));
 
           <h3 style={{ flex: 1, textAlign: 'center' }}>🎤 AI Mock Interview</h3>
 
-          <div style={{ width: '150px' }}></div>
+          <select
+  value={selectedInterviewPresetId}
+  onChange={e => setSelectedInterviewPresetId(e.target.value)}
+  className="preset-dropdown"
+  style={{ marginLeft: 'auto', padding: '6px 12px', borderRadius: 6 }}
+>
+  <option value="">Select Interview Preset</option>
+  {interviewPresets.map(preset => (
+    <option key={preset.id} value={preset.id}>
+      {preset.name || preset.title || `Preset ${preset.id}`}
+    </option>
+  ))}
+</select>
+
         </div>
 
         {selectedHistory ? (

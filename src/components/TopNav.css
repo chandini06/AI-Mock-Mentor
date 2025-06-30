@@ -1,22 +1,28 @@
 .dashboard-navbar {
-    display: flex;
-    justify-content: space-between; /* Pushes logo to left, user section to right */
-    align-items: center;
-    padding: 15px 25px; /* Adjust padding as needed */
-    background-color: var(--navbar-bg, #fff); /* Using CSS variables for consistency */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    width: 100%;
-    box-sizing: border-box; /* Include padding in width */
+  position: fixed;                
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;                  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  background-color: var(--navbar-bg, #fff);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  z-index: 1000;                 
+  box-sizing: border-box;
 }
+
 
 .logo-section {
     display: flex;
     align-items: center;
-    gap: 8px; /* Space between icon and text */
+    gap: 8px; 
 }
 
 .logo-icon {
-    color: var(--brand-color, #2a57e8); /* Example brand color */
+    color: var(--brand-color, #2a57e8); 
 }
 
 .app-name {

@@ -4,7 +4,7 @@
   font-family: sans-serif;
 }
 
-/* Sidebar */
+
 .chat-sidebar {
   width: 20%;
   background-color: #f3f4f6;
@@ -51,6 +51,7 @@
   margin-bottom: 12px;
   border-radius: 8px;
   box-shadow: 0 0 3px rgba(0,0,0,0.1);
+  cursor: pointer;
 }
 
 .chat-item-text h4 {
@@ -84,7 +85,6 @@
 .chat-main {
   display: flex;
   flex-direction: column;
-  background-color: #fff;
   transition: width 0.3s ease;
 }
 
@@ -104,7 +104,8 @@
   gap: 12px;
 }
 
-.back-btn, .new-chat-btn {
+.back-btn,
+.new-chat-btn {
   background: #010113ff;
   color: #fff;
   border: none;
@@ -129,29 +130,15 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  background-color: #ffffff; 
-  background-image: url('/src/pages/avatars-bg.png');
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
+    url('/src/pages/avatars-bg.png');
   background-repeat: repeat;
-  background-size: 700px; 
+  background-size: 700px;
   background-position: center;
-  opacity: 1;
-  position: relative;
-  
-}
-.chat-body::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(255,255,255,0.7); 
-  z-index: 1;
-  pointer-events: none;
+  background-attachment: fixed;
 }
 
-
-.chat-body > * {
-  position: relative;
-  z-index: 2;
-}
 
 
 /* Bubbles */
@@ -216,4 +203,14 @@
 
 .send-btn:hover {
   background-color: #010113ff;
+}
+
+/* Dropdown */
+.preset-dropdown {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #fff;
+  color: #111;
 }

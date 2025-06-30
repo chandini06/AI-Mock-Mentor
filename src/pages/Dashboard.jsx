@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import './Dashboard.css';
 import { Link } from 'react-router-dom';
-import { MessageSquare, UserCheck, Clock } from 'lucide-react'; // Removed BrainCog, Settings, Users2 as they'll be in TopNav or specific sections
-import TopNav from '../components/TopNav'; // Assuming TopNav is in a 'components' folder
+import { MessageSquare, UserCheck, Clock, Settings, Users2, BarChart2 } from 'lucide-react';
+import TopNav from '../components/TopNav';
 
 function Dashboard() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userRole, setUserRole] = useState('user'); 
+
+  useEffect(() => {
+    
+    const role = localStorage.getItem('userRole') || 'user';
+    setUserRole(role);
+  }, []);
 
   useEffect(() => {
     async function fetchStats() {
       try {
         setLoading(true);
         setError(null);
-        // Replace '/api/stats' with your actual backend API URL
         const response = await fetch('/api/stats');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -30,7 +36,6 @@ function Dashboard() {
     fetchStats();
   }, []);
 
-  // Helper to show loading, error, or the stat value
   const renderStat = (value) => {
     if (loading) return '...';
     if (error) return '–';
@@ -40,8 +45,7 @@ function Dashboard() {
 
   return (
     <div className="dashboard-wrapper">
-      {/* Use the reusable TopNav component */}
-      <TopNav /> 
+      <TopNav />
 
       <div className="dashboard-stats">
         <div className="stat-card">
@@ -55,8 +59,7 @@ function Dashboard() {
           <p>Mock Interviews</p>
           <div className="stat-content">
             <h3>{renderStat(stats?.mockInterviews)}</h3>
-            {/* Using a different icon for mock interviews now that UserCheck is for Account */}
-            <UserCheck className="stat-icon" color="#28a745" /> 
+            <UserCheck className="stat-icon" color="#28a745" />
           </div>
         </div>
         <div className="stat-card">
@@ -87,7 +90,7 @@ function Dashboard() {
 
           <div className="mode-card interview">
             <div className="card-header">
-              <UserCheck className="icon" size={22} /> {/* Reused UserCheck for interview card icon */}
+              <UserCheck className="icon" size={22} />
               <h3>Mock Interview</h3>
             </div>
             <p>Practice interviews with realistic scenarios and get instant feedback</p>
@@ -99,6 +102,39 @@ function Dashboard() {
             </div>
             <Link to="/interview" className="secondary-btn">Start Interview Practice</Link>
           </div>
+
+          
+{userRole === 'admin' && (
+  <div className="admin-cards-wrapper">
+    <div className="mode-card admin">
+      <div className="card-header">
+        <Users2 className="icon" size={22} />
+        <h3>User Management</h3>
+      </div>
+      <p>Manage users: create, block, reset passwords</p>
+      <Link to="/admin/users" className="primary-btn">Go to User Management</Link>
+    </div>
+
+    <div className="mode-card admin">
+      <div className="card-header">
+        <Settings className="icon" size={22} />
+        <h3>Bot Preset Management</h3>
+      </div>
+      <p>Create or modify mentor/interview bot templates</p>
+      <Link to="/admin/bots" className="secondary-btn">Manage Bots</Link>
+    </div>
+
+    <div className="mode-card admin">
+      <div className="card-header">
+        <BarChart2 className="icon" size={22} />
+        <h3>Reports & Logs</h3>
+      </div>
+      <p>View user reports, bot analytics, and system logs</p>
+      <Link to="/admin/reports" className="secondary-btn">View Reports</Link>
+    </div>
+  </div>
+)}
+
         </div>
       </main>
     </div>

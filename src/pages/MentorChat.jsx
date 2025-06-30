@@ -5,6 +5,7 @@ import './MentorChat.css';
 
 const LOCAL_STORAGE_HISTORY_KEY = 'mentor_chat_history';
 const LOCAL_STORAGE_CURRENT_CHAT_KEY = 'mentor_current_chat_id';
+const LOCAL_STORAGE_PRESETS_KEY = 'mentor_presets';
 
 const MentorChat = () => {
   const navigate = useNavigate();
@@ -15,23 +16,26 @@ const MentorChat = () => {
   const [input, setInput] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isTyping, setIsTyping] = useState(false);
+  const [presets, setPresets] = useState([]);
+  const [selectedPresetId, setSelectedPresetId] = useState('');
 
   useEffect(() => {
-    const storedHistory = localStorage.getItem(LOCAL_STORAGE_HISTORY_KEY);
+    const storedHistory = JSON.parse(localStorage.getItem(LOCAL_STORAGE_HISTORY_KEY) || '[]');
     const storedCurrentChatId = localStorage.getItem(LOCAL_STORAGE_CURRENT_CHAT_KEY);
+    const storedPresets = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PRESETS_KEY) || '[]');
+const mentorPresets = storedPresets.filter(p => p.type === 'Mentor'); 
+setPresets(mentorPresets);
 
-    if (storedHistory) {
-      const parsedHistory = JSON.parse(storedHistory);
-      setChatHistory(parsedHistory);
-      if (storedCurrentChatId && parsedHistory.find(chat => chat.id === Number(storedCurrentChatId))) {
-        setCurrentChatId(Number(storedCurrentChatId));
-        const foundChat = parsedHistory.find(chat => chat.id === Number(storedCurrentChatId));
-        setMessages(foundChat.messages || []);
-      } else if (parsedHistory.length > 0) {
-        const lastChat = parsedHistory[parsedHistory.length - 1];
-        setCurrentChatId(lastChat.id);
-        setMessages(lastChat.messages || []);
-      }
+
+    if (storedHistory.length) {
+      setChatHistory(storedHistory);
+      const currentId = storedCurrentChatId && storedHistory.find(c => c.id === Number(storedCurrentChatId))
+        ? Number(storedCurrentChatId)
+        : storedHistory[storedHistory.length - 1].id;
+
+      setCurrentChatId(currentId);
+      const selectedChat = storedHistory.find(chat => chat.id === currentId);
+      setMessages(selectedChat?.messages || []);
     }
   }, []);
 
@@ -42,22 +46,35 @@ const MentorChat = () => {
   }, [chatHistory, currentChatId]);
 
   const createNewChat = () => {
+    if (!selectedPresetId) {
+      alert("Please select a preset before starting a chat.");
+      return;
+    }
+
+    const selectedPreset = presets.find(p => p.id === Number(selectedPresetId));
+    if (!selectedPreset) return;
+
     const newId = Date.now();
+    const starterMessage = {
+      id: newId + 1,
+      text: selectedPreset.prompt,
+      time: new Date().toLocaleTimeString(),
+      isUser: false,
+    };
+
     const newChat = {
       id: newId,
-      title: 'New Chat',
-      preview: '',
+      title: selectedPreset.title || selectedPreset.name || 'Untitled Preset',
+      preview: selectedPreset.prompt.substring(0, 40),
       time: new Date().toLocaleTimeString(),
-      messages: [],
+      messages: [starterMessage],
     };
 
     const updatedHistory = [...chatHistory, newChat];
     setChatHistory(updatedHistory);
     setCurrentChatId(newId);
-    setMessages([]);
+    setMessages([starterMessage]);
     setInput('');
-    localStorage.setItem(LOCAL_STORAGE_HISTORY_KEY, JSON.stringify(updatedHistory));
-    localStorage.setItem(LOCAL_STORAGE_CURRENT_CHAT_KEY, newId.toString());
   };
 
   const handleSend = () => {
@@ -87,53 +104,33 @@ const MentorChat = () => {
       setMessages(finalMessages);
       setIsTyping(false);
 
-      let updatedHistory;
-      if (!currentChatId) {
-        const newId = Date.now();
-        const newChat = {
-          id: newId,
-          title: 'New Chat',
-          preview: userMessage.text.substring(0, 40),
-          time: new Date().toLocaleTimeString(),
-          messages: finalMessages,
-        };
-        updatedHistory = [...chatHistory, newChat];
-        setCurrentChatId(newId);
-      } else {
-        updatedHistory = chatHistory.map(chat => {
-          if (chat.id === currentChatId) {
-            return {
+      const updatedHistory = chatHistory.map(chat =>
+        chat.id === currentChatId
+          ? {
               ...chat,
               preview: userMessage.text.substring(0, 40),
               time: new Date().toLocaleTimeString(),
               messages: finalMessages,
-            };
-          }
-          return chat;
-        });
-      }
+            }
+          : chat
+      );
 
       setChatHistory(updatedHistory);
-      localStorage.setItem(LOCAL_STORAGE_HISTORY_KEY, JSON.stringify(updatedHistory));
-      localStorage.setItem(LOCAL_STORAGE_CURRENT_CHAT_KEY, currentChatId?.toString() || Date.now().toString());
     }, 1000);
   };
 
   const handleDeleteChat = (id) => {
     const updatedHistory = chatHistory.filter(chat => chat.id !== id);
     setChatHistory(updatedHistory);
-    localStorage.setItem(LOCAL_STORAGE_HISTORY_KEY, JSON.stringify(updatedHistory));
 
     if (id === currentChatId) {
       if (updatedHistory.length > 0) {
         const lastChat = updatedHistory[updatedHistory.length - 1];
         setCurrentChatId(lastChat.id);
         setMessages(lastChat.messages || []);
-        localStorage.setItem(LOCAL_STORAGE_CURRENT_CHAT_KEY, lastChat.id.toString());
       } else {
         setCurrentChatId(null);
         setMessages([]);
-        localStorage.removeItem(LOCAL_STORAGE_CURRENT_CHAT_KEY);
       }
     }
   };
@@ -147,9 +144,7 @@ const MentorChat = () => {
     }
   };
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
     <div className="mentor-chat-container">
@@ -157,9 +152,7 @@ const MentorChat = () => {
         <div className="chat-sidebar">
           <div className="sidebar-header">
             <h2>Chat History</h2>
-            <button className="sidebar-toggle-btn" onClick={toggleSidebar} title="Close Sidebar">
-              <X size={16} />
-            </button>
+            <button className="sidebar-toggle-btn" onClick={toggleSidebar}><X size={16} /></button>
           </div>
           {chatHistory.length === 0 ? (
             <p className="no-history">No chats yet</p>
@@ -177,11 +170,7 @@ const MentorChat = () => {
                 </div>
                 <button
                   className="delete-btn"
-                  title="Delete chat"
-                  onClick={e => {
-                    e.stopPropagation();
-                    handleDeleteChat(chat.id);
-                  }}
+                  onClick={e => { e.stopPropagation(); handleDeleteChat(chat.id); }}
                 >
                   <Trash2 size={16} />
                 </button>
@@ -191,13 +180,11 @@ const MentorChat = () => {
         </div>
       )}
 
-      <div className="chat-main" style={{ width: sidebarOpen ? '80%' : '100%', backgroundImage: "url('/avatars-bg.png')", backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+      <div className="chat-main" style={{ width: sidebarOpen ? '80%' : '100%' }}>
         <div className="chat-header">
-          <div className="left-header-buttons" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div className="left-header-buttons">
             {!sidebarOpen && (
-              <button className="back-btn" onClick={toggleSidebar} title="Open Sidebar">
-                <Menu size={16} />
-              </button>
+              <button className="back-btn" onClick={toggleSidebar}><Menu size={16} /></button>
             )}
             <button className="back-btn" onClick={() => navigate('/dashboard')}>
               <ArrowLeft size={20} /> Back to dashboard
@@ -207,6 +194,18 @@ const MentorChat = () => {
           <h3>🧠 AI Mentor Chat</h3>
 
           <div className="right-header-buttons">
+            <select
+              value={selectedPresetId}
+              onChange={e => setSelectedPresetId(e.target.value)}
+              className="preset-dropdown"
+            >
+              <option value="">Select Preset</option>
+              {presets.map(p => (
+                <option key={p.id} value={p.id}>
+                  {p.title || p.name || `Preset ${p.id}`}
+                </option>
+              ))}
+            </select>
             <button className="new-chat-btn" onClick={createNewChat}>
               <Plus size={16} /> New Chat
             </button>
@@ -235,7 +234,7 @@ const MentorChat = () => {
             onChange={e => setInput(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && handleSend()}
           />
-          <button className="send-btn" onClick={handleSend} title="Send">
+          <button className="send-btn" onClick={handleSend}>
             <Send size={18} />
           </button>
         </div>
