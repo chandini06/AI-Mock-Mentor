@@ -123,7 +123,7 @@
   background-color: #010113ff;
 }
 
-/* Chat Body */
+
 .chat-body {
   flex-grow: 1;
   padding: 60px;
@@ -141,7 +141,7 @@
 
 
 
-/* Bubbles */
+
 .chat-bubble {
   padding: 12px 16px;
   border-radius: 12px;

@@ -1,3 +1,5 @@
+/* Reports.css */
+
 .reports-container {
   padding: 2rem;
   font-family: 'Segoe UI', sans-serif;
@@ -9,12 +11,22 @@
   font-size: 2rem;
   font-weight: 700;
   color: #1f2937;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-/* Stat table */
-.usage-card {
+/* Usage Table */
+.section-card {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   margin-bottom: 2rem;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
 .usage-table {
@@ -25,7 +37,7 @@
 
 .usage-table th,
 .usage-table td {
-  border: 1px solid #ddd;
+  border: 1px solid #e5e7eb;
   padding: 0.75rem;
   text-align: left;
   font-size: 0.95rem;
@@ -41,30 +53,11 @@
   background-color: #ffffff;
 }
 
-.empty-msg {
-  color: #888;
-  font-size: 14px;
-  padding-top: 10px;
-}
-
-/* Double section layout */
+/* Bot + Logs Cards */
 .double-section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
-}
-
-.section-card {
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-.section-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
 }
 
 .bot-list li,
@@ -96,6 +89,13 @@
   font-weight: 600;
 }
 
+.empty-msg {
+  color: #888;
+  font-size: 14px;
+  padding-top: 10px;
+}
+
+/* Responsive */
 @media (max-width: 480px) {
   .reports-container {
     padding: 1rem;
@@ -104,4 +104,25 @@
   .section-card {
     padding: 1rem;
   }
+}
+.reports-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.back-button {
+  background-color: #1f2937;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #111827;
 }
