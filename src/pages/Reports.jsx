@@ -34,16 +34,16 @@ const Reports = () => {
 
     setUserStats(formattedStats);
 
-    // --- Bot Stats ---
+   
     const currentStats = JSON.parse(localStorage.getItem('bot_stats')) || {
-      totalBots: 2, // default for now
+      totalBots: 2, 
       activeBots: 2,
       inactiveBots: 0,
       totalResponses: 0
     };
     setBotStats(currentStats);
 
-    // --- Logs ---
+ 
     const storedLogs = JSON.parse(localStorage.getItem('system_logs')) || [];
     setLogs(storedLogs);
   }, []);
